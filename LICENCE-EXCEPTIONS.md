@@ -3,6 +3,8 @@ All code and derived works (including release files) are released under the MIT 
 
 Literature review is released under the [Creative Commons Attribution-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-sa/4.0/) licence, copyright (c) 2022 Chris Lloyd-Jones.
 
+Literature review contains excerpts from cited works, used under fair use doctrine. All citations and author credit must be retained for their original author.
+
 ### File listing
 For the avoidance of doubt:
 - `./literature-review/` is the root of the literature review repository, released under the creative commons licence.

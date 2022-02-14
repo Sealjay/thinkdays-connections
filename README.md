@@ -9,6 +9,18 @@
 ## Overview
 A short research project exploring how humans make connections to build trust, and representing the results in the format of a 2D game.
 
+## Architecture
+- DAPR
+  - Backend
+    - World State
+    - Player State
+    - Player Actions
+    - Updates via WebSockets
+  - Frontend - React App
+    - React Application
+    - Connects via websockets
+  - Frontend - Server App
+    - Serves React App
 
 ## Licensing
 thinkdays-connections code is available under the [MIT Licence](./LICENCE), whilst associated writeups are released under [Creative Commons Attribution-ShareAlike 4.0 International](Attribution-ShareAlike 4.0 International). Full licensing information in the [licence exceptions](./LICENCE-EXCEPTIONS.md) file.

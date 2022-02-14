@@ -2,6 +2,7 @@ module.exports = {
     types: [
       { value: "feat", name: "feat:     A new feature" },
       { value: "fix", name: "fix:      A bug fix" },
+        { value: "lit", name: "lit:     Literature review changes" },
       { value: "docs", name: "docs:     Documentation only changes" },
       {
         value: "style",
@@ -24,7 +25,7 @@ module.exports = {
       { value: "WIP", name: "WIP:      Work in progress" },
     ],
 
-    scopes: [{ name: "infra" }, { name: "cicd" }, { name: "your-scope-1" }],
+    scopes: [{ name: "infra" }, { name: "cicd" }, { name: "backend" },{ name: "frontend" }, { name: "writing"} ],
 
     allowTicketNumber: false,
     isTicketNumberRequired: false,
@@ -47,7 +48,7 @@ module.exports = {
     allowCustomScopes: true,
     allowBreakingChanges: ["feat", "fix"],
     // skip any questions you want
-    skipQuestions: ["body", "breaking"],
+    skipQuestions: ["body", "breaking","footer"],
 
     // limit subject length
     subjectLimit: 100,

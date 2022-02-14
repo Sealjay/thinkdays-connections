@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Who Killed Fun?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<!--
+  This example requires Tailwind CSS v2.0+
+
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<!-- Background color split screen for large screens -->
+<div aria-hidden="true" class="fixed top-0 left-0 w-1/2 h-full bg-zinc-800"></div>
+<div aria-hidden="true" class="fixed top-0 right-0 w-1/2 h-full bg-zinc-800"></div>
+<div class="relative min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="flex-shrink-0 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <!-- Logo section -->
+                <div class="flex items-center px-2 lg:px-0 xl:w-64">
+                    <div class="flex-shrink-0">
+                        <img alt="Workflow" class="h-8 w-auto"
+                             src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                    </div>
+                </div>
+
+                <!-- Search section -->
+                <div class="flex-1 flex justify-center lg:justify-end">
+                    <div class="w-full px-2 lg:px-6 relative text-blue-100">
+                        Who killed fun?
+                    </div>
+                </div>
+                <div class="flex lg:hidden">
+                    <!-- Mobile menu button -->
+                    <button aria-controls="mobile-menu" aria-expanded="false"
+                            class="bg-blue-600 inline-flex items-center justify-center p-2 rounded-md text-blue-400 hover:text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-600 focus:ring-slate-300"
+                            type="button">
+                        <span class="sr-only">Open main menu</span>
+                        <!--
+                          Icon when menu is closed.
+
+                          Heroicon name: outline/menu-alt-1
+
+                          Menu open: "hidden", Menu closed: "block"
+                        -->
+                        <svg aria-hidden="true" class="block h-6 w-6" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6h16M4 12h8m-8 6h16" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2"/>
+                        </svg>
+                        <!--
+                          Icon when menu is open.
+
+                          Heroicon name: outline/x
+
+                          Menu open: "block", Menu closed: "hidden"
+                        -->
+                        <svg aria-hidden="true" class="hidden h-6 w-6" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Links section -->
+                <div class="hidden lg:block lg:w-80">
+                    <div class="flex items-center justify-end">
+                        <div class="flex">
+                            <a class="px-3 py-2 rounded-md text-sm font-medium text-blue-50 hover:text-white"
+                               href="#">Documentation</a>
+                            <a class="px-3 py-2 rounded-md text-sm font-medium text-blue-50 hover:text-white"
+                               href="#">Support</a>
+                        </div>
+                        <!-- Profile dropdown -->
+                        <div class="ml-4 relative flex-shrink-0">
+                            <div>
+
+                                    <span class="sr-only">Open user menu</span>
+                                    <img alt="" class="h-8 w-8 rounded-full"
+                                         src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80">
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="lg:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3">
+                <a class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-800"
+                   href="#">Dashboard</a>
+                <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-200 hover:text-blue-100 hover:bg-blue-600"
+                   href="#">Support</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-blue-800">
+                <div class="px-2">
+                    <a class="block px-3 py-2 rounded-md text-base font-medium text-blue-200 hover:text-blue-100 hover:bg-blue-600"
+                       href="#">Your Profile</a>
+                    <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-200 hover:text-blue-100 hover:bg-blue-600"
+                       href="#">Settings</a>
+                    <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-200 hover:text-blue-100 hover:bg-blue-600"
+                       href="#">Sign out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3 column wrapper -->
+    <div class="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
+        <!-- Left sidebar & main wrapper -->
+        <div class="flex-1 min-w-0 bg-zinc-800 xl:flex">
+            <div class="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-zinc-800">
+                <div class="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+                    <!-- Start left column area -->
+                    <div class="h-full relative text-white" style="min-height: 12rem">
+                        Scrolling chat appears here
+                    </div>
+                    <!-- End left column area -->
+                </div>
+            </div>
+
+            <div class="bg-slate-300 lg:min-w-0 lg:flex-1">
+                <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+                    <!-- Start main area-->
+                    <div class="relative h-full" style="min-height: 36rem">
+                        <img src="https://i.pinimg.com/736x/33/f1/ac/33f1ace807660430d4d25e6b1860436f.jpg"/>
+                    </div>
+                    <!-- End main area -->
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-zinc-800 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0">
+            <div class="h-full pl-6 py-6 lg:w-80 text-white">
+                <!-- Start right column area -->
+                <div class="h-full relative" style="min-height: 16rem">
+                    Events appear here
+                    <!-- This example requires Tailwind CSS v2.0+ -->
+                    <div class="flow-root">
+                        <ul class="-mb-8" role="list">
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                          class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-slate-200"></span>
+                                    <div class="relative flex space-x-3">
+                                        <div>
+            <span class="h-8 w-8 rounded-full bg-gray-400 flex  items-center justify-center ring-8 ring-slate-300">
+              <!-- Heroicon name: solid/user -->
+              <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"/>
+              </svg>
+            </span>
+                                        </div>
+                                        <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                            <div>
+                                                <p class="text-sm text-gray-50">Applied to <a
+                                                        class="font-medium text-gray-300" href="#">Front End
+                                                    Developer</a></p>
+                                            </div>
+                                            <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                <time datetime="2020-09-20">Sep 20</time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                          class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"></span>
+                                    <div class="relative flex space-x-3">
+                                        <div>
+            <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-slate-300">
+              <!-- Heroicon name: solid/thumb-up -->
+              <svg aria-hidden="true" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"/>
+              </svg>
+            </span>
+                                        </div>
+                                        <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                            <div>
+                                                <p class="text-sm text-gray-500">Advanced to phone screening by <a
+                                                        class="font-medium text-gray-900" href="#">Bethany Blake</a></p>
+                                            </div>
+                                            <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                <time datetime="2020-09-22">Sep 22</time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                          class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"></span>
+                                    <div class="relative flex space-x-3">
+                                        <div>
+            <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-slate-300">
+              <!-- Heroicon name: solid/check -->
+              <svg aria-hidden="true" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      fill-rule="evenodd"/>
+              </svg>
+            </span>
+                                        </div>
+                                        <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                            <div>
+                                                <p class="text-sm text-gray-500">Completed phone screening with <a
+                                                        class="font-medium text-gray-900" href="#">Martha Gardner</a>
+                                                </p>
+                                            </div>
+                                            <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                <time datetime="2020-09-28">Sep 28</time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                          class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"></span>
+                                    <div class="relative flex space-x-3">
+                                        <div>
+            <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-slate-300">
+              <!-- Heroicon name: solid/thumb-up -->
+              <svg aria-hidden="true" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"/>
+              </svg>
+            </span>
+                                        </div>
+                                        <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                            <div>
+                                                <p class="text-sm text-gray-500">Advanced to interview by <a
+                                                        class="font-medium text-gray-900" href="#">Bethany Blake</a></p>
+                                            </div>
+                                            <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                <time datetime="2020-09-30">Sep 30</time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="relative pb-8">
+                                    <div class="relative flex space-x-3">
+                                        <div>
+            <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-slate-300">
+              <!-- Heroicon name: solid/check -->
+              <svg aria-hidden="true" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      fill-rule="evenodd"/>
+              </svg>
+            </span>
+                                        </div>
+                                        <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                            <div>
+                                                <p class="text-sm text-gray-500">Completed interview with <a
+                                                        class="font-medium text-gray-900" href="#">Katherine Snyder</a>
+                                                </p>
+                                            </div>
+                                            <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                <time datetime="2020-10-04">Oct 4</time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- End right column area -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
