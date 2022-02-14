@@ -25,6 +25,6 @@ func main() {
 }
 
 /*
-TODO: Add state store processing
-TODO: Add persist
+	// TODO: Add state store processing
+	// TODO: Add persist for dapr
 */
