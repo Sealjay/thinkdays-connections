@@ -37,8 +37,9 @@ func main() {
 	app.Get("/api/newplayer", addPlayer)
 	app.Static("*", "./client/build/index.html")
 
-	port := os.Getenv("PORT")
-	if port == "" {
+	port := ":" + os.Getenv("APP_PORT")
+	fmt.Println("Starting server on port: " + port)
+	if port == ":" {
 		port = ":5000"
 	}
 

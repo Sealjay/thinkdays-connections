@@ -2,10 +2,12 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/dapr/go-sdk/service/common"
 	daprd "github.com/dapr/go-sdk/service/http"
 	"log"
 	"net/http"
+	"os"
 )
 
 var sub = &common.Subscription{
@@ -15,7 +17,13 @@ var sub = &common.Subscription{
 }
 
 func main() {
-	s := daprd.NewService(":5002")
+	port := ":" + os.Getenv("APP_PORT")
+	fmt.Println("Starting player server on port: " + port)
+	if port == ":" {
+		port = ":5001"
+	}
+
+	s := daprd.NewService(port)
 	//Subscribe to a topic
 	if err := s.AddTopicEventHandler(sub, eventHandler); err != nil {
 		log.Fatalf("error adding topic subscription: %v", err)

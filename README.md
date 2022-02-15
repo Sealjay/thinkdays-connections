@@ -32,21 +32,22 @@ This application is built using DAPR v1.6.0. To run this locally, you will need:
 ## Setting up the application to run locally
 1. Begin DAPR with `dapr init`
 2. Go Application to serve React frontend
-  - Open the `src/frontend` directory
-  - Build the application with `go build server.go`
   - Open the `src/frontend/client` directory
   - Install the application with `npm install`
   - Build the application with `npm run build`
   - Open the `src/frontend` directory
-  - Run the application with `dapr run --app-id frontend --app-port 5000 --dapr-http-port 3500 ./server`
+  - Run the application with `dapr run --app-id frontend --app-port 5000 --dapr-http-port 3500 --dapr-grpc-port 60000 --components-path ../config go run server.go`
+3. Go Application to handle player events
+  - Open the `src/players` directory
+  - Run the application with `dapr run --app-id players-backend --app-port 5001 --dapr-http-port 3501 --components-path ../config go run server.go`
 
 ## Setting up the application to run in Azure Container Apps
 ### Scripts
-You can use the local bash scripts provided, including `./src/deploy-containers.sh` to push the containers to your private Azure Container Registry, and `./src/aca-setup.sh` to set up the Azure Container App.
+You can use the local bash scripts provided, including `./src/deploy-containers.sh` to push the containers to your private Azure Container Registry, `./src/aca-setup.sh` to set up the Azure Container App, and `./src/cleanup.sh` to clean up resources.
 
-Make sure the files are executable with `chmod 755 deploy-containers.sh aca-setup.sh`.
+Make sure the files are executable, by navigating to src with `cd src` and changing permissions with `chmod 755 deploy-containers.sh aca-setup.sh cleanup.sh`.
 
-Open `./src/acr.example.env`, replace the placeholder variables in with your own values, and save the file as `./src/acr.env`, and update the containerName value in `src/components.yaml` from `concontainer` to the container name you chose.
+Open `./src/aca.example.env`, replace the placeholder variables in with your own values, and save the file as `./src/aca.env`, and update the containerName value in `src/components.yaml` from `concontainer` to the container name you chose.
 
 ### Publishing the container images to your private Azure Container Registry
 In an ideal world, you'd be able to publish the container images to your private Azure Container Registry as part of your CI/CD pipeline.
@@ -142,7 +143,7 @@ az containerapp create \
 2. Optionally, delete the container with `az acr repository delete --name $AZURE_REGISTRY_NAME --image thinkdays-connections/frontend:latest`
 
 ## Licensing
-thinkdays-connections code is available under the [MIT Licence](./LICENCE), whilst associated writeups are released under [Creative Commons Attribution-ShareAlike 4.0 International](Attribution-ShareAlike 4.0 International). Full licensing information in the [licence exceptions](./LICENCE-EXCEPTIONS.md) file.
+thinkdays-connections code is available under the [MIT Licence](./LICENCE), whilst associated writeups are released under [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/). Full licensing information in the [licence exceptions](./LICENCE-EXCEPTIONS.md) file.
 
 ## Contact
 Feel free to contact me [on Twitter](https://twitter.com/sealjay_clj). For bugs, please [raise an issue on GitHub](https://github.com/Sealjay/thinkdays-connections/issue).

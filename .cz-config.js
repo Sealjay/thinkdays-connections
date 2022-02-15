@@ -25,7 +25,7 @@ module.exports = {
       { value: "WIP", name: "WIP:      Work in progress" },
     ],
 
-    scopes: [{ name: "infra" }, { name: "cicd" }, { name: "backend" },{ name: "frontend" }, { name: "writing"} ],
+    scopes: [{ name: "infra" }, { name: "cicd" }, {name:"world"}, { name: "players" },{ name: "frontend" }, { name: "writing"} ],
 
     allowTicketNumber: false,
     isTicketNumberRequired: false,
