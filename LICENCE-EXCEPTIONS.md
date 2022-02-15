@@ -5,9 +5,15 @@ Literature review is released under the [Creative Commons Attribution-ShareAlike
 
 Literature review contains excerpts from cited works, used under fair use doctrine. All citations and author credit must be retained for their original author.
 
+RPG tilesets are licenced as so:
+- [Zelda-like tilesets](https://opengameart.org/content/zelda-like-tilesets-and-sprites) are created by [ArMM1998](https://opengameart.org/users/armm1998) and are released under [CC0 1.0 Universal (CC0 1.0)
+  Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+- [Space-ship assets](https://opengameart.org/content/space-ship-construction-kit) are created by [Skorpio](https://opengameart.org/users/skorpio) and are released under [Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)](http://creativecommons.org/licenses/by-sa/3.0/).
+
 ### File listing
 For the avoidance of doubt:
 - `./literature-review/` is the root of the literature review repository, released under the creative commons licence.
+- RPG tilesets are those found in `src/frontend/public/assets/tilesets/`.
 - All other directories are released under the MIT licence.
 
 #### MIT Licence

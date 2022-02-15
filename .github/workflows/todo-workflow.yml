@@ -12,3 +12,4 @@ jobs:
         REPO: ${{ github.repository }}
         SHA: ${{ github.sha }}
         REF: ${{ github.ref }}
+        PROJECT_COLUMN_ID: 1
