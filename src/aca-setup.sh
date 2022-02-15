@@ -6,7 +6,7 @@
 # Syntax: ./aca-setup.sh
 
 # Pull in environment variables from .env file
-source acr.env
+source aca.env
 
 # Log in, enable extensions and providers
 az login

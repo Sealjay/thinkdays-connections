@@ -6,7 +6,7 @@
 # Syntax: ./deploy-containers.sh
 
 # Pull in environment variables from .env file
-source acr.env
+source aca.env
 
 # Log in to Azure
 az login
