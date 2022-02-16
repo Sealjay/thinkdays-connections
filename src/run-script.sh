@@ -7,7 +7,12 @@
 
 frontend(){
   cd frontend
-  dapr run --app-id frontend --app-port 5000 --dapr-http-port 3500 --log-level debug go run server.go
+  dapr run --app-id frontend --app-port 5000 --dapr-http-port 3500 --log-level debug go run *.go
+}
+
+frontendx(){
+  cd frontend
+  dapr run --app-id frontend --app-port 5000 --dapr-http-port 3500 --log-level debug go run server3.go
 }
 
 backend() {
@@ -25,6 +30,7 @@ read -p "Enter your choice: " choice
 case $choice in
   1) frontend ;;
   2) backend ;;
+  3) frontendx ;;
   *) echo "Invalid choice" ;;
 
   esac

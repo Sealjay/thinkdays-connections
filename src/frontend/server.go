@@ -1,50 +1,50 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	dapr "github.com/dapr/go-sdk/client"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
+	daprd "github.com/dapr/go-sdk/service/http"
+	"github.com/gorilla/mux"
+	"net/http"
 	"os"
 )
 
-func addPlayer(c *fiber.Ctx) error {
-	client, err := dapr.NewClient()
-	if err != nil {
-		panic(err)
-	}
-	//defer client.Close()
-	ctx := context.Background()
-	var (
-		pubsubName = "pubsub"
-		topicName  = "newplayer"
-	)
-	data := []byte("ping")
-
-	if err := client.PublishEvent(ctx, pubsubName, topicName, data); err != nil {
-		fmt.Printf("Failed to publish event: %v", err)
-	} else {
-		fmt.Printf("Published event: %s", data)
-	}
-	return c.SendString("Player added.")
-}
-
 func main() {
-	app := fiber.New()
-	app.Use(cors.New())
-	app.Static("/", "./client/build")
-	app.Get("/api/newplayer", addPlayer)
-	app.Static("*", "./client/build/index.html")
-
 	port := ":" + os.Getenv("APP_PORT")
-	fmt.Println("Starting server on port: " + port)
 	if port == ":" {
 		port = ":5000"
 	}
+	fmt.Println("Starting server on port: " + port)
 
-	if err := app.Listen(port); err != nil {
-		panic(err)
+	muxRouter := mux.NewRouter()
+	muxRouter.HandleFunc("/api/newplayer", publishPlayerToTopic)
+
+	addFileHandlers(muxRouter)
+
+	websocketHub := NewHub()
+	go websocketHub.run()
+	muxRouter.HandleFunc("/ws", socketHandler(websocketHub))
+
+	s := daprd.NewServiceWithMux(port, muxRouter)
+	addTopicSubcription(s)
+
+	if err := s.Start(); err != nil && err != http.ErrServerClosed {
+		fmt.Errorf("error: %v", err)
 	}
-	fmt.Printf("Started running on http://127.0.0.1:%v\n", port)
+}
+
+func addFileHandlers(mux *mux.Router) {
+	fs := http.FileServer(http.Dir("./client/build"))
+	localFileList := []string{"logo192.png",
+		"logo512.png",
+		"manifest.json",
+		"favicon.ico",
+		"index.html",
+		"robots.txt",
+		"sitemap.txt",
+		"",
+	}
+	for _, localFile := range localFileList {
+		mux.Handle("/"+localFile, fs)
+	}
+	mux.PathPrefix("/static").Handler(http.StripPrefix("/", fs))
 }

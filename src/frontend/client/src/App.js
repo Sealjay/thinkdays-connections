@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import React, {Fragment, useCallback, useEffect, useState} from 'react';
 import { Dialog, Transition } from '@headlessui/react'
 import {
     HomeIcon,
@@ -8,6 +8,8 @@ import {
 } from '@heroicons/react/outline'
 
 import Feed from './Feed'
+
+const socket = new WebSocket("ws://localhost:5000/ws");
 
 const navigation = [
     { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -18,7 +20,36 @@ function classNames(...classes) {
 }
 
 export default function App() {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [message, setMessage] = useState('');
+    const [inputValue, setInputValue] = useState('');
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        socket.onopen = () => {
+            setMessage('Connected')
+        };
+
+        socket.onmessage = (e) => {
+            setMessage("Get message from server: " + e.data)
+        };
+
+        return () => {
+            socket.close()
+        }
+    }, [])
+
+    const handleClick = useCallback((e) => {
+        e.preventDefault()
+
+        socket.send(JSON.stringify({
+            action: "sendMessage",
+            message: inputValue
+        }))
+    }, [inputValue])
+
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value)
+    }, [])
 
     return (
         <>
@@ -152,7 +183,14 @@ export default function App() {
                                     </a>
                                 ))}
                             </nav>
-                            <Feed />
+                            { socket ? (
+                                <>
+                                    <Feed socket={socket} />
+                                    <div className="text-white">Connected</div>
+                                </>
+                            ) : (
+                                <div className="text-white">Not Connected</div>
+                            )}
                         </div>
                         <div className="flex-shrink-0 flex bg-gray-700 p-4">
                             <a href="#" className="flex-shrink-0 w-full group block">
@@ -191,6 +229,11 @@ export default function App() {
                             </div>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                                 <img src="https://i.pinimg.com/736x/33/f1/ac/33f1ace807660430d4d25e6b1860436f.jpg"/>
+                                <div className="App"><p>
+                                    <input id="input" type="text" value={inputValue} onChange={handleChange} />
+                                    <button onClick={handleClick}>Send</button>
+                                    <pre>{message}</pre></p>
+                                </div>
                             </div>
                         </div>
                     </main>
