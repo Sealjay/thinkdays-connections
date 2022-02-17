@@ -10,27 +10,32 @@ frontend(){
   dapr run --app-id frontend --app-port 5000 --dapr-http-port 3500 --log-level debug go run *.go
 }
 
-frontendx(){
-  cd frontend
-  dapr run --app-id frontend --app-port 5000 --dapr-http-port 3500 --log-level debug go run server3.go
+players() {
+  cd players
+  dapr run --app-id players-backend --app-port 5001 --dapr-http-port 3501 --log-level debug go run *.go
 }
 
-backend() {
-  cd players
-  dapr run --app-id players-backend --app-port 5001 --dapr-http-port 3501 --log-level debug go run players.go
+world() {
+  cd world
+  dapr run --app-id world-backend --app-port 5002 --dapr-http-port 3502 --log-level debug go run *.go
+}
+
+feed() {
+  cd feed
+  dapr run --app-id feed-backend --app-port 5003 --dapr-http-port 3503 --log-level debug go run *.go
 }
 
 # Ask which function to run
 echo "Which function would you like to run?"
 echo "1. frontend"
-echo "2. backend"
+echo "2. backend - players"
+echo "2. backend - world"
 read -p "Enter your choice: " choice
 
 # run function
 case $choice in
   1) frontend ;;
-  2) backend ;;
-  3) frontendx ;;
+  2) players ;;
   *) echo "Invalid choice" ;;
 
   esac

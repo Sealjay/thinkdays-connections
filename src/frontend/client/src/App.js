@@ -8,8 +8,9 @@ import {
 } from '@heroicons/react/outline'
 
 import Feed from './Feed'
+import ConnectionState from "./ConnectionState";
 
-const socket = new WebSocket("ws://localhost:5000/ws");
+const socket = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/ws`);
 
 const navigation = [
     { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -26,11 +27,26 @@ export default function App() {
 
     useEffect(() => {
         socket.onopen = () => {
-            setMessage('Connected')
+            setMessage(`Connected to ws://${window.location.hostname}:${window.location.port}/ws`)
         };
 
         socket.onmessage = (e) => {
-            setMessage("Get message from server: " + e.data)
+            try {
+                let jsonResponse=JSON.parse(e.data);
+                switch (jsonResponse.action) {
+                    case 'sendMessage':
+                        setMessage(`Get message from server: ${jsonResponse.message}`);
+                        break;
+                    default:
+                        setMessage(`Unknown message type (${jsonResponse.action}): ${jsonResponse.message}`);
+                }
+            } catch (err) {
+                setMessage("Get non-json from server: " + e.data)
+            }
+        };
+
+        socket.onclose = () => {
+            setMessage(`Disconnected from ws://${window.location.hostname}:${window.location.port}/ws`)
         };
 
         return () => {
@@ -183,13 +199,13 @@ export default function App() {
                                     </a>
                                 ))}
                             </nav>
-                            { socket ? (
+                            { socket.readyState === 1 ? (
                                 <>
                                     <Feed socket={socket} />
-                                    <div className="text-white">Connected</div>
+                                    <ConnectionState currentState='connected' />
                                 </>
                             ) : (
-                                <div className="text-white">Not Connected</div>
+                                <ConnectionState currentState='disconnected' />
                             )}
                         </div>
                         <div className="flex-shrink-0 flex bg-gray-700 p-4">
