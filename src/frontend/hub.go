@@ -59,7 +59,7 @@ func socketHandler(hub *Hub) func(w http.ResponseWriter, r *http.Request) {
 
 		hub.clients[conn] = true
 		fmt.Println("Connected!")
-
+		publishToTopic("pubsub", "newconnection", conn.RemoteAddr().String())
 		read(hub, conn)
 	}
 }
@@ -80,4 +80,12 @@ func read(hub *Hub, client *websocket.Conn) {
 			fmt.Printf("Unknown action: %v\n", message.Action)
 		}
 	}
+}
+
+func broadcastMessage(action string, message interface{}) {
+	var publishMessage Message
+	publishMessage.Action = action
+	publishMessage.Message = fmt.Sprint(message)
+	websocketHub.broadcast <- publishMessage
+	fmt.Printf("Action (%v): %v\n", action, publishMessage.Message)
 }

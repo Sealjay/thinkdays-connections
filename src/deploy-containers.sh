@@ -17,3 +17,15 @@ cd frontend/
 docker build -t thinkdays-connections/frontend:latest .
 docker tag thinkdays-connections/frontend:latest $AZURE_REGISTRY_NAME.azurecr.io/thinkdays-connections/frontend:latest
 docker push $AZURE_REGISTRY_NAME.azurecr.io/thinkdays-connections/frontend:latest
+
+buildContainer(containerName, folderName) {
+  cd $folderName
+  docker build -t thinkdays-connections/$containerName:latest .
+  docker tag thinkdays-connections/$containerName:latest $AZURE_REGISTRY_NAME.azurecr.io/thinkdays-connections/$containerName:latest
+  docker push $AZURE_REGISTRY_NAME.azurecr.io/thinkdays-connections/$containerName:latest
+  cd ..
+}
+
+
+buildContainer "backend" "backend"
+buildContainer

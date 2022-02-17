@@ -10,5 +10,5 @@ source aca.env
 
 # Login and delete resources
 az login
-az group delete --name $RESOURCE_GROUP
-az acr repository delete --name $AZURE_REGISTRY_NAME --image thinkdays-connections/frontend:latest
+az group delete --name $RESOURCE_GROUP --no-wait --yes
+az acr repository delete --name $AZURE_REGISTRY_NAME --image thinkdays-connections/frontend:latest --yes

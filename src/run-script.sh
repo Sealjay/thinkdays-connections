@@ -29,13 +29,16 @@ feed() {
 echo "Which function would you like to run?"
 echo "1. frontend"
 echo "2. backend - players"
-echo "2. backend - world"
+echo "3. backend - world"
+echo "4. backend - feed"
 read -p "Enter your choice: " choice
 
 # run function
 case $choice in
   1) frontend ;;
   2) players ;;
+  3) world ;;
+  4) feed ;;
   *) echo "Invalid choice" ;;
 
   esac
