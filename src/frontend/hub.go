@@ -12,7 +12,7 @@ type Hub struct {
 }
 
 type Message struct {
-	Action  string `json:"action"`
+	Type    string `json:"type"`
 	Message string `json:"message"`
 }
 
@@ -72,20 +72,34 @@ func read(hub *Hub, client *websocket.Conn) {
 			delete(hub.clients, client)
 			break
 		}
-		switch message.Action {
-		case "sendMessage":
+		fmt.Printf("Received message: %v\n", message.Message)
+		switch message.Type {
+		case "SEND_MESSAGE":
+			message.Type = "SET_DEMO_MESSAGE"
 			fmt.Printf("Message received and rebroadcast: %v\n", message.Message)
 			hub.broadcast <- message
+		case "SET_SCENE":
+			fmt.Printf("Scene received and rebroadcast: %v\n", message.Message)
+			hub.broadcast <- message
+		case "SET_SCRIPT":
+			fmt.Printf("Scene received and rebroadcast: %v\n", message.Message)
+			hub.broadcast <- message
+		case "SET_HEADER":
+			fmt.Printf("Header received and rebroadcast: %v\n", message.Message)
+			hub.broadcast <- message
+		case "ADD_FEED":
+			fmt.Printf("Feed received and rebroadcast: %v\n", message.Message)
+			hub.broadcast <- message
 		default:
-			fmt.Printf("Unknown action: %v\n", message.Action)
+			fmt.Printf("Unknown action: %v\n", message.Type)
 		}
 	}
 }
 
 func broadcastMessage(action string, message interface{}) {
 	var publishMessage Message
-	publishMessage.Action = action
+	publishMessage.Type = action
 	publishMessage.Message = fmt.Sprint(message)
 	websocketHub.broadcast <- publishMessage
-	fmt.Printf("Action (%v): %v\n", action, publishMessage.Message)
+	fmt.Printf("Type (%v): %v\n", action, publishMessage.Message)
 }

@@ -6,10 +6,11 @@ import ConnectionState from "./ConnectionState";
 import Logo from "./Logo";
 import {PlayIcon} from "@heroicons/react/solid";
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-export default function Sidebar({sidebarOpen, setSidebarOpen, socket}) {
+export default function Sidebar({sidebarOpen, setSidebarOpen}) {
+    // Swap in adventurer for a connection ID
+    let adventurer="xyz";
+    // Swap in timeline for feed context
+    let timeline=[];
     return (
         <>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -60,9 +61,9 @@ export default function Sidebar({sidebarOpen, setSidebarOpen, socket}) {
                                     <Logo />
                                 </div>
                                 <nav className="mt-5 px-2 space-y-1">
-                                    { socket.readyState === 1 ? (
+                                    { 1 === 1 ? (
                                         <>
-                                            <Feed/>
+                                            <Feed timeline={timeline}/>
                                         </>
                                     ) : (
                                         <></>
@@ -70,23 +71,17 @@ export default function Sidebar({sidebarOpen, setSidebarOpen, socket}) {
                                 </nav>
                             </div>
                             <div className="flex-shrink-0 flex bg-gray-700 p-4">
-                                <a href="#" className="flex-shrink-0 group block">
+                                <div className="flex-shrink-0 group block">
                                     <div className="flex items-center">
                                         <div>
                                             <PlayIcon className="inline-block h-10 w-10 rounded-full h-6 w-6 text-white" aria-hidden="true" />
                                         </div>
                                         <div className="ml-3">
-                                            <p className="text-base font-medium text-white">Adventurer</p>
-                                            { socket.readyState === 1 ? (
-                                                <>
-                                                    <ConnectionState currentState='connected' />
-                                                </>
-                                            ) : (
-                                                <ConnectionState currentState='disconnected' />
-                                            )}
+                                            <p className="text-base font-medium text-white">{adventurer}</p>
+                                            <ConnectionState />
                                         </div>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </Transition.Child>
@@ -103,9 +98,9 @@ export default function Sidebar({sidebarOpen, setSidebarOpen, socket}) {
                             <Logo />
                         </div>
                         <nav className="mt-5 flex-1 px-2 space-y-1">
-                        { socket.readyState === 1 ? (
+                        { 1 === 1 ? (
                             <>
-                                <Feed/>
+                                <Feed timeline={timeline}/>
                             </>
                         ) : (
                             <></>
@@ -113,23 +108,17 @@ export default function Sidebar({sidebarOpen, setSidebarOpen, socket}) {
                         </nav>
                     </div>
                     <div className="flex-shrink-0 flex bg-gray-700 p-4">
-                        <a href="#" className="flex-shrink-0 w-full group block">
+                        <div className="flex-shrink-0 w-full group block">
                             <div className="flex items-center">
                                 <div>
                                     <PlayIcon className="inline-block h-10 w-10 rounded-full h-6 w-6 text-white" aria-hidden="true" />
                                 </div>
                                 <div className="ml-3">
-                                    <p className="text-sm font-medium text-white">Adventurer</p>
-                                    { socket.readyState === 1 ? (
-                                        <>
-                                            <ConnectionState currentState='connected' />
-                                        </>
-                                    ) : (
-                                        <ConnectionState currentState='disconnected' />
-                                    )}
+                                    <p className="text-sm font-medium text-white">{adventurer}</p>
+                                    <ConnectionState />
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>

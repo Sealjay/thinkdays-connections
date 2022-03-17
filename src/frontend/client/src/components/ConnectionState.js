@@ -1,15 +1,20 @@
+import {useAppContext} from "../utils/AppContextProvider";
+import {CONNECTION_STATE} from "../utils/WebSocket";
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function ConnectionState({currentState}) {
+export default function ConnectionState() {
+    const {state, dispatch} = useAppContext();
+    let currentState = state.connectionState;
     let bgClassName, textClassName, buttonClassName, displayText;
-    if (currentState === 'connected') {
+    if (currentState === CONNECTION_STATE.CONNECTED) {
         bgClassName = 'bg-green-100';
         textClassName = 'text-green-800';
         buttonClassName='text-green-400';
         displayText= 'Connected';
-    } else {
+    } else if (currentState === CONNECTION_STATE.DISCONNECTED) {
         bgClassName = 'bg-red-100';
         textClassName = 'text-red-800';
         buttonClassName='text-red-400';

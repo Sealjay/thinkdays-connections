@@ -25,12 +25,17 @@ feed() {
   dapr run --app-id feed-backend --app-port 5003 --dapr-http-port 3503 --log-level debug go run *.go
 }
 
+runall() {
+  frontend && players && world && feed
+}
+
 # Ask which function to run
 echo "Which function would you like to run?"
 echo "1. frontend"
 echo "2. backend - players"
 echo "3. backend - world"
 echo "4. backend - feed"
+echo "5. run all"
 read -p "Enter your choice: " choice
 
 # run function
@@ -39,6 +44,7 @@ case $choice in
   2) players ;;
   3) world ;;
   4) feed ;;
+  5) runall ;;
   *) echo "Invalid choice" ;;
 
   esac

@@ -1,5 +1,5 @@
 # Literature Review
-> Content broken down by search term.
+> Literature review around human and social connections.
 
 ## Social Connections
 <div class="csl-entry"><i>Do Social Connections Reduce Moral Hazard? Evidence from the New York City Taxi Industry</i>. (2010). [Book]. National Bureau of Economic Research.</div>

@@ -1,0 +1,12 @@
+## Architecture
+- DAPR
+    - Backend
+        - World State
+        - Player State
+        - Player Actions
+        - Updates via WebSockets
+    - Frontend - React App
+        - React Application
+        - Connects via websockets
+    - Frontend - Server App
+        - Serves React App

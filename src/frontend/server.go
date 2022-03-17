@@ -51,6 +51,11 @@ func addFileHandlers(mux *mux.Router) {
 	for _, localFile := range localFileList {
 		mux.Handle("/"+localFile, fs)
 	}
+	serveUpAssetsAndStaticContent(mux, fs)
+}
+
+func serveUpAssetsAndStaticContent(mux *mux.Router, fs http.Handler) {
+	mux.PathPrefix("/assets").Handler(http.StripPrefix("/", fs))
 	mux.PathPrefix("/static").Handler(http.StripPrefix("/", fs))
 }
 
@@ -62,7 +67,7 @@ func publishPlayerToTopic(w http.ResponseWriter, r *http.Request) {
 }
 
 func headerEventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err error) {
-	fmt.Printf("Header event received: %s", e.Data)
-	broadcastMessage("setHeader", e.Data)
+	fmt.Printf("Header event received: %s\n", e.Data)
+	broadcastMessage("SET_HEADER", e.Data)
 	return false, nil
 }

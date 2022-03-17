@@ -27,5 +27,6 @@ buildContainer(containerName, folderName) {
 }
 
 
-buildContainer "backend" "backend"
-buildContainer
+buildContainer "players" "players"
+buildContainer "world" "world"
+buildContainer "

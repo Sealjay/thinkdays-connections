@@ -1,48 +1,31 @@
-import { AcademicCapIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
-
-const timeline = [
-    {
-        id: 1,
-        content: 'Learnt',
-        target: 'Firecast',
-        href: '#',
-        icon: AcademicCapIcon,
-        iconBackground: 'bg-gray-400',
-    },
-    {
-        id: 2,
-        content: 'Discovered',
-        target: 'Big Box',
-        href: '#',
-        icon: ThumbUpIcon,
-        iconBackground: 'bg-blue-500',
-    },
-    {
-        id: 3,
-        content: 'Discovered',
-        target: 'Grow Plant',
-        href: '#',
-        icon: AcademicCapIcon,
-        iconBackground: 'bg-green-500',
-    },
-    {
-        id: 4,
-        content: 'Ended',
-        target: 'Prehistoric Period',
-        href: '#',
-        icon: ThumbUpIcon,
-        iconBackground: 'bg-blue-500',
-    },
-]
+import {AcademicCapIcon, ThumbUpIcon, UserIcon, XCircleIcon} from '@heroicons/react/solid'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Feed() {
+export default function Feed({timeline}) {
+
+
+    const renderSwitch = (event) => {
+        switch (event) {
+            case 'AcademicCapIcon':
+                return <AcademicCapIcon className="h-5 w-5 text-white" aria-hidden="true"  />
+            case 'ThumbUpIcon':
+                return <ThumbUpIcon className="h-5 w-5 text-white" aria-hidden="true"  />
+            case 'UserIcon':
+                return <UserIcon className="h-5 w-5 text-white" aria-hidden="true" />
+            case 'x-circle':
+                return <XCircleIcon className="h-5 w-5 text-white" aria-hidden="true" />
+            default:
+                return null
+            }
+    }
+
+
     return (
         <div className="flow-root">
-            <ul role="list" className="-mb-8 pl-2">
+            <ul className="-mb-8 pl-2">
                 {timeline.map((event, eventIdx) => (
                     <li key={event.id}>
                         <div className="relative pb-8">
@@ -53,17 +36,16 @@ export default function Feed() {
                                 <div>
                   <span
                       className={classNames(
-                          event.iconBackground,
+                          event.bgcolor,
                           'h-7 w-7 rounded-full flex items-center justify-center ring-4 ring-zinc-200'
-                      )}
-                  >
-                    <event.icon className="h-5 w-5 text-white" aria-hidden="true" />
+                      )}>
+                  {renderSwitch(event.icon)}
                   </span>
                                 </div>
                                 <div className="min-w-0 flex-1 pt-1.5 pr-1 flex justify-between space-x-4">
                                     <div>
                                         <p className="text-sm text-gray-100">
-                                            {event.content}{' '}
+                                            {event.action}{' '}
                                             <a href={event.href} className="font-medium text-zinc-400">
                                                 {event.target}
                                             </a>
