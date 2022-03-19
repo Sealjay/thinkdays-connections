@@ -61,6 +61,7 @@ export default function Sidebar({sidebarOpen, setSidebarOpen}) {
                                     <Logo />
                                 </div>
                                 <nav className="mt-5 px-2 space-y-1">
+                                    {/* TODO: Remove this test */}
                                     { 1 === 1 ? (
                                         <>
                                             <Feed timeline={timeline}/>
@@ -98,6 +99,7 @@ export default function Sidebar({sidebarOpen, setSidebarOpen}) {
                             <Logo />
                         </div>
                         <nav className="mt-5 flex-1 px-2 space-y-1">
+                            {/* TODO: Remove this test */}
                         { 1 === 1 ? (
                             <>
                                 <Feed timeline={timeline}/>
