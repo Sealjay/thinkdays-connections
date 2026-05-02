@@ -1,3 +1,5 @@
+> **Archived.** This repository is no longer maintained. It was an exploration of how humans make connections to build trust, built with DAPR and GoLang on Azure Container Apps. Preserved for reference only.
+
 # thinkdays-connections
 > An exploration of how humans make connections to build trust.
 
